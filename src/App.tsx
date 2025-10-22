@@ -1,33 +1,29 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [commands, setInput] = useState('')
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setInput(e.target.value)
+  }
+  const splitInput = ()=> commands.split('\n').map(cmd => cmd.trim()).filter(cmd => cmd.length > 0);
+  const startEvaluation = () => {
+    const bounds = splitInput()[0].split(' ').map(Number);
+    const commandsToEvaluate = splitInput().slice(1);
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
+      <h1>Command Entry</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+        <section>
+          <textarea  rows={15} cols={50} name="command-center" value={commands} onChange={handleChange} id="commands">
+          </textarea>
+        </section>
+        <button onClick={() => startEvaluation()}>
+          Evaluate Input
         </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
