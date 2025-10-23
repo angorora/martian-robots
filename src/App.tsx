@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './App.css'
+import { handleCommands } from './services/commandHandler'
 
 function App() {
   const [commands, setInput] = useState('')
@@ -10,6 +11,7 @@ function App() {
   const startEvaluation = () => {
     const bounds = splitInput()[0].split(' ').map(Number);
     const commandsToEvaluate = splitInput().slice(1);
+    handleCommands([bounds[0], bounds[1]], commandsToEvaluate);
   }
 
   return (
