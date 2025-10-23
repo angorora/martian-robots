@@ -29,22 +29,18 @@ export const handleCommands = (gridBounds: [number, number], commandsToEvaluate:
             switch (command) {
                 case 'F':
                     robot.moveForward();
-                    robot.printCoordinates(command);
                     break;
                 case 'L':
                     robot.moveLeft(robot.getDirection());
-                      robot.printCoordinates(command);
                     break;
                 case 'R':
                     robot.moveRight(robot.getDirection());
-                      robot.printCoordinates(command);
                     break;
             }
 
             if (grid.isOffGrid(robot.getCoordinates().x, robot.getCoordinates().y)) {
                 robot.setIsLost(true);
                 grid.addScents(robot.getCoordinates().x, robot.getCoordinates().y);
-                robot.reportStatus();
                 break
             };
         }
